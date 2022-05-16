@@ -1,0 +1,86 @@
+.container {
+  width: 330px;
+  height: 480px;
+  border: 2px solid rebeccapurple;
+}
+
+.header {
+  height: 100%;
+}
+
+.result-container {
+  height: 10%;
+  width: 100%;
+  display: block;
+  border-bottom: 2px solid;
+  border-color: aqua;
+  .oper {
+    height: 50%;
+    text-align: right;
+  }
+  .result {
+    height: 50%;
+    text-align: right;
+  }
+}
+
+.input-container {
+  height: 15%;
+  width: 100%;
+  border-bottom: 2px solid;
+  border-color: blueviolet;
+
+  input[type="number"] {
+    height: 90%;
+    width: 98%;
+    text-align: right;
+    margin: 0;
+    -webkit-appearance: textfield !important;
+    -moz-appearance: textfield !important;
+  }
+}
+
+.button-container {
+  height: 70%;
+  width: 100%;
+  display: block;
+}
+
+.btn {
+  height: 80px;
+  width: 74px;
+  margin: 4px;
+  border: none;
+  color: #667379;
+  font-size: 24px;
+  border-radius: 40%;
+  cursor: pointer;
+  box-shadow: 4px 2px 4px #999;
+  transition: all 0.2s ease 0s;
+}
+
+.btn:hover {
+  background-color: #b0d0db;
+  color: rgb(29, 28, 28);
+}
+
+.btn:active {
+  box-shadow: 2px 2px 2px #777, 0px 0px 20px 0px #b0d0db;
+  transform: translateY(5px);
+  transition: all 0.1s ease 0s;
+}
+
+.operator {
+  background-color: #e1d5e9;
+  color: #582878;
+}
+
+.clear {
+  color: #fdf4ff;
+  background-color: #feb92d;
+}
+
+.res {
+  background-color: #8e28dc;
+  color: #fdf4ff;
+}
