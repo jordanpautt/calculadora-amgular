@@ -1,16 +1,16 @@
 <div class="container">
     <div class="header">
         <div class="result-container">
-            <div class="oper">{{value1}}{{operatorText}}{{value2}}</div>
-            <div class="result">={{resultF}}</div>
+            <div class="oper">{{value1}} {{operator}} {{value2}}</div>
+            <div class="result"><span *ngIf="resultF">= </span>{{resultF}}</div>
         </div>
         <div class="input-container">
             <input type="number" disabled="false" [(ngModel)]="textInput">
         </div>
         <div class=".button-container">
-            <button class="btn" *ngFor="let data of buttonList"
-                [ngClass]="{'clear': data.value === 'c', 'operator': data.value === 'x' || data.value === '+' || data.value === '/' || data.value === '-' , 'res':data.value === '=' }"
-                (click)="setValueCalculator(data)">{{data.value}}</button>
+            <button class="btn" *ngFor="let type of buttonList"
+                [ngClass]="{'clear': type === 'c', 'operator': type === 'x' || type=== '+' || type === '/' || type === '-' , 'res':type === '=' }"
+                (click)="setValueCalculator(type)">{{type}}</button>
         </div>
     </div>
 </div>

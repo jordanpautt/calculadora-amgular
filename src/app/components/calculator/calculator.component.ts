@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sum } from '../models/sum.model';
-
-interface ButtonList {
-  type: string;
-  value: string;
-}
-
+import { Divide, Multiply, Subtract, Sum } from '../models';
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
@@ -16,121 +10,89 @@ export class CalculatorComponent implements OnInit {
   value2: number;
   operator: string = '';
   textInput: string = '';
-  operatorText: string = '';
-  resultF: number;
+  resultF: number | string;
 
-  buttonList: Array<ButtonList> = [
-    {
-      type: '1',
-      value: '1',
-    },
-    {
-      type: '2',
-      value: '2',
-    },
-    {
-      type: '3',
-      value: '3',
-    },
-    {
-      type: 'divide',
-      value: '/',
-    },
-    {
-      type: '4',
-      value: '4',
-    },
-    {
-      type: '5',
-      value: '5',
-    },
-    {
-      type: '6',
-      value: '6',
-    },
-    {
-      type: 'multiply',
-      value: 'x',
-    },
-    {
-      type: '7',
-      value: '7',
-    },
-    {
-      type: '8',
-      value: '8',
-    },
-    {
-      type: '9',
-      value: '9',
-    },
-    {
-      type: 'subtract',
-      value: '-',
-    },
-    {
-      type: 'c',
-      value: 'c',
-    },
-    {
-      type: '0',
-      value: '0',
-    },
-    {
-      type: '=',
-      value: '=',
-    },
-    {
-      type: 'sum',
-      value: '+',
-    },
+  buttonList: Array<string> = [
+    '1',
+    '2',
+    '3',
+    '/',
+    '4',
+    '5',
+    '6',
+    'x',
+    '7',
+    '8',
+    '9',
+    '-',
+    'c',
+    '0',
+    '=',
+    '+',
   ];
-
-  buttonFunction = {
-    multiply: (a: number, b: number) => a * b,
-    sum: (a: number, b: number) => a + b,
-    subtract: (a: number, b: number) => a - b,
-    divide: (a: number, b: number) => {
-      let result = 0;
-      if (b !== 0) {
-        result = a / b;
-      } else {
-        alert('no puedes dividir por cero');
-      }
-      return result;
-    },
-  };
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  setValueCalculator({ type, value }: ButtonList): void {
-    if (Number(value) || Number(value) === 0) {
-      this.textInput += value;
+  setValueCalculator(type: string): void {
+    //preguntamos si es un numero lo sumamos al string textInput
+    if (Number(type) || Number(type) === 0) {
+      this.textInput += type;
     } else {
-      if (value !== '=' && value !== 'c' && !this.operator) {
+      // entonces es una funcion
+      // entrara a este if si el tipo es +, x, -, o /
+      if (type !== '=' && type !== 'c' && !this.resultF && !this.operator) {
         this.value1 = +this.textInput;
         this.operator = type;
-        this.operatorText = value;
         this.textInput = '';
       }
-      if (value === '=' && this.value1 && this.operator) {
+
+      //solo entra a este if si el type es igual = y ya hay valor1 y hay valor en el input
+      if (type === '=' && this.value1 >= 0 && this.textInput && this.operator) {
         this.value2 = +this.textInput;
-        this.resultF = this.buttonFunction[this.operator](
-          this.value1,
-          this.value2
-        );
         this.textInput = '';
+        this.caseOperations(this.operator);
       }
-      if (value === 'c') {
+
+      //se cumplira esta condicion cuando el type sea igual a c
+      //se limpiara todos los campos
+      if (type === 'c') {
+        this.operator = '';
         this.textInput = '';
+        this.resultF = '';
         this.value1 = null;
         this.value2 = null;
-        this.resultF = null;
-        this.operator = '';
-        this.operatorText = '';
       }
+    }
+  }
+
+  //funcion que recibira que tipo de operacion de realizara
+  //en cada caso se creara una instacia de la clase correspondiente
+  caseOperations(type: string) {
+    switch (type) {
+      case '+':
+        const sum = new Sum(this.value1, this.value2);
+        this.resultF = sum.Response;
+        break;
+
+      case '-':
+        const subtract = new Subtract(this.value1, this.value2);
+        this.resultF = subtract.Response;
+        break;
+
+      case 'x':
+        const multiply = new Multiply(this.value1, this.value2);
+        this.resultF = multiply.Response;
+        break;
+
+      case '/':
+        const divide = new Divide(this.value1, this.value2);
+        this.resultF = divide.Response;
+        break;
+
+      default:
+        break;
     }
   }
 }

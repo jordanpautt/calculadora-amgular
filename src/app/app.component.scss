@@ -1,13 +1,41 @@
+.main{
+  height: 100%;
+}
+
 .header {
   height: 40px;
   width: 100%;
   padding: 10px;
+  color: white;
+  font-family:'Courier New', Courier, monospace;
   text-align: center;
+  font-size: 24px;
+  background-image: linear-gradient(to right, #582878 , #feb92d);
   background-color: rgb(58, 53, 53);
 }
 
 .content {
-  margin-top: 15px;
+  margin-top: 28px;
   display: flex;
   justify-content: center;
+}
+
+.footer{
+  cursor:cell;
+  height: 10px;
+  text-align: center;
+  font-family:'Courier New', Courier, monospace;
+  color: rgb(134, 98, 134);
+  font-size: 22px;
+  margin-top: 42px;
+  text-decoration-line:  underline;
+  text-decoration-thickness: auto;
+  text-decoration-color: purple;
+}
+
+.footer:hover{
+  height: 100%;
+  color: purple;
+  text-shadow: 2px 2px 5px #beb6b6;
+  text-decoration-color: rgb(212, 171, 212);
 }
